@@ -110,11 +110,47 @@ export const createProducto = async (req, res) => {
 export const updateProducto = async (req, res) => {
   try {
     const { id } = req.params;
-    const { name, salary } = req.body;
-
+    const {
+      nombre,
+      descripcion,
+      costo,
+      tipoVenta,
+      tallas,
+      opcionAmedida,
+      colores,
+      codigo,
+      categoria1,
+      categoria2,
+      indicacion,
+      material,
+      dimensionYpeso,
+      otros,
+      precio,
+      efectos,
+      silueta,
+      urlImages
+    } = req.body;
     const [result] = await pool.query(
-      "UPDATE PRODUCTO SET name = IFNULL(?, name), salary = IFNULL(?, salary) WHERE id = ?",
-      [name, salary, id]
+      "UPDATE PRODUCTO SET  nombre = = IFNULL(?, nombre), descripcion = = IFNULL(?, descripcion), costo = = IFNULL(?, costo), tipoVenta = = IFNULL(?, tipoVenta), tallas = = IFNULL(?, tallas), opcionAmedida = = IFNULL(?, opcionAmedida), colores = = IFNULL(?, colores), codigo = = IFNULL(?, codigo), categoria1 = = IFNULL(?, categoria1), categoria2 = = IFNULL(?, categoria2), indicacion = = IFNULL(?, indicacion), material = = IFNULL(?, material), dimensionYpeso = = IFNULL(?, dimensionYpeso), otros = = IFNULL(?, otros), precio = = IFNULL(?, precio), efectos = = IFNULL(?, efectos), silueta = = IFNULL(?, silueta), urlImages = = IFNULL(?, urlImages) WHERE id = ?",
+      [
+        nombre,
+        descripcion,
+        costo,
+        tipoVenta,
+        tallas,
+        opcionAmedida,
+        colores,
+        codigo,
+        categoria1,
+        categoria2,
+        indicacion,
+        material,
+        dimensionYpeso,
+        otros,
+        precio,
+        efectos,
+        silueta,
+        urlImages, id]
     );
 
     if (result.affectedRows === 0)
