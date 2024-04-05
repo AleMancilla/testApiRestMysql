@@ -15,6 +15,7 @@ CREATE TABLE PRODUCTO (
     categoria1 VARCHAR(50),
     categoria2 VARCHAR(50),
     indicacion TEXT,
+    urlImages VARCHAR(500);
     material VARCHAR(100),
     dimensionYpeso VARCHAR(100),
     otros TEXT,

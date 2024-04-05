@@ -17,7 +17,7 @@ export const getProducto = async (req, res) => {
     ]);
 
     if (rows.length <= 0) {
-      return res.status(404).json({ message: "Employee not found" });
+      return res.status(404).json({ message: "Product not found" });
     }
 
     res.json(rows[0]);
@@ -32,7 +32,7 @@ export const deleteProducto = async (req, res) => {
     const [rows] = await pool.query("DELETE FROM PRODUCTO WHERE idProducto = ?", [id]);
 
     if (rows.affectedRows <= 0) {
-      return res.status(404).json({ message: "Employee not found" });
+      return res.status(404).json({ message: "Product not found" });
     }
 
     res.sendStatus(204);
@@ -60,10 +60,11 @@ export const createProducto = async (req, res) => {
       otros,
       precio,
       efectos,
-      silueta
+      silueta,
+      urlImages
     } = req.body;
     const [rows] = await pool.query(
-      "INSERT INTO PRODUCTO (nombre, descripcion, costo, tipoVenta, tallas, opcionAmedida, colores, codigo, categoria1, categoria2, indicacion, material, dimensionYpeso, otros, precio, efectos, silueta ) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)",
+      "INSERT INTO PRODUCTO (nombre, descripcion, costo, tipoVenta, tallas, opcionAmedida, colores, codigo, categoria1, categoria2, indicacion, material, dimensionYpeso, otros, precio, efectos, silueta, urlImages ) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)",
       [nombre,
         descripcion,
         costo,
@@ -80,7 +81,8 @@ export const createProducto = async (req, res) => {
         otros,
         precio,
         efectos,
-        silueta]
+        silueta,
+        urlImages]
     );
     res.status(201).json({ id: rows.insertId, nombre,
       descripcion,
@@ -98,7 +100,8 @@ export const createProducto = async (req, res) => {
       otros,
       precio,
       efectos,
-      silueta });
+      silueta,
+      urlImages });
   } catch (error) {
     return res.status(500).json({ message: "Something goes wrong: "+ error });
   }
@@ -115,7 +118,7 @@ export const updateProducto = async (req, res) => {
     );
 
     if (result.affectedRows === 0)
-      return res.status(404).json({ message: "Employee not found" });
+      return res.status(404).json({ message: "Product not found" });
 
     const [rows] = await pool.query("SELECT * FROM PRODUCTO WHERE idProducto = ?", [
       id,
