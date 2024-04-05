@@ -36,21 +36,18 @@ CREATE TABLE ALQUILER (
 
 -- Tabla EMPLEADO (Tabla base para ESPECIALISTA y ADMINISTRADOR)
 CREATE TABLE EMPLEADO (
-    idEmpleado INT AUTO_INCREMENT PRIMARY KEY,
-    -- Otros campos de empleado
+    idEmpleado INT AUTO_INCREMENT PRIMARY KEY
 );
 
 -- Tabla ESPECIALISTA (hereda de EMPLEADO)
 CREATE TABLE ESPECIALISTA (
     idEspecialista INT AUTO_INCREMENT PRIMARY KEY,
-    -- Otros campos específicos de especialista
     FOREIGN KEY (idEspecialista) REFERENCES EMPLEADO(idEmpleado)
 );
 
 -- Tabla ADMINISTRADOR (hereda de EMPLEADO)
 CREATE TABLE ADMINISTRADOR (
     idAdministrador INT AUTO_INCREMENT PRIMARY KEY,
-    -- Otros campos específicos de administrador
     FOREIGN KEY (idAdministrador) REFERENCES EMPLEADO(idEmpleado)
 );
 

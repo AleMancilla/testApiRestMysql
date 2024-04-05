@@ -2,7 +2,7 @@ import { pool } from "../db.js";
 
 export const getProductos = async (req, res) => {
   try {
-    const [rows] = await pool.query("SELECT * FROM producto");
+    const [rows] = await pool.query("SELECT * FROM PRODUCTO");
     res.json(rows);
   } catch (error) {
     return res.status(500).json({ message: "Something goes wrong: " + error });
@@ -12,7 +12,7 @@ export const getProductos = async (req, res) => {
 export const getProducto = async (req, res) => {
   try {
     const { id } = req.params;
-    const [rows] = await pool.query("SELECT * FROM producto WHERE idProducto = ?", [
+    const [rows] = await pool.query("SELECT * FROM PRODUCTO WHERE idProducto = ?", [
       id,
     ]);
 
@@ -29,7 +29,7 @@ export const getProducto = async (req, res) => {
 export const deleteProducto = async (req, res) => {
   try {
     const { id } = req.params;
-    const [rows] = await pool.query("DELETE FROM producto WHERE idProducto = ?", [id]);
+    const [rows] = await pool.query("DELETE FROM PRODUCTO WHERE idProducto = ?", [id]);
 
     if (rows.affectedRows <= 0) {
       return res.status(404).json({ message: "Employee not found" });
@@ -63,7 +63,7 @@ export const createProducto = async (req, res) => {
       silueta
     } = req.body;
     const [rows] = await pool.query(
-      "INSERT INTO producto (nombre, descripcion, costo, tipoVenta, tallas, opcionAmedida, colores, codigo, categoria1, categoria2, indicacion, material, dimensionYpeso, otros, precio, efectos, silueta ) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)",
+      "INSERT INTO PRODUCTO (nombre, descripcion, costo, tipoVenta, tallas, opcionAmedida, colores, codigo, categoria1, categoria2, indicacion, material, dimensionYpeso, otros, precio, efectos, silueta ) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)",
       [nombre,
         descripcion,
         costo,
@@ -110,14 +110,14 @@ export const updateProducto = async (req, res) => {
     const { name, salary } = req.body;
 
     const [result] = await pool.query(
-      "UPDATE producto SET name = IFNULL(?, name), salary = IFNULL(?, salary) WHERE id = ?",
+      "UPDATE PRODUCTO SET name = IFNULL(?, name), salary = IFNULL(?, salary) WHERE id = ?",
       [name, salary, id]
     );
 
     if (result.affectedRows === 0)
       return res.status(404).json({ message: "Employee not found" });
 
-    const [rows] = await pool.query("SELECT * FROM producto WHERE idProducto = ?", [
+    const [rows] = await pool.query("SELECT * FROM PRODUCTO WHERE idProducto = ?", [
       id,
     ]);
 
