@@ -131,7 +131,7 @@ export const updateProducto = async (req, res) => {
       urlImages
     } = req.body;
     const [result] = await pool.query(
-      "UPDATE PRODUCTO SET  nombre = = IFNULL(?, nombre), descripcion = = IFNULL(?, descripcion), costo = = IFNULL(?, costo), tipoVenta = = IFNULL(?, tipoVenta), tallas = = IFNULL(?, tallas), opcionAmedida = = IFNULL(?, opcionAmedida), colores = = IFNULL(?, colores), codigo = = IFNULL(?, codigo), categoria1 = = IFNULL(?, categoria1), categoria2 = = IFNULL(?, categoria2), indicacion = = IFNULL(?, indicacion), material = = IFNULL(?, material), dimensionYpeso = = IFNULL(?, dimensionYpeso), otros = = IFNULL(?, otros), precio = = IFNULL(?, precio), efectos = = IFNULL(?, efectos), silueta = = IFNULL(?, silueta), urlImages = = IFNULL(?, urlImages) WHERE id = ?",
+      "UPDATE PRODUCTO SET  nombre = IFNULL(?, nombre), descripcion = IFNULL(?, descripcion), costo = IFNULL(?, costo), tipoVenta = IFNULL(?, tipoVenta), tallas = IFNULL(?, tallas), opcionAmedida = IFNULL(?, opcionAmedida), colores = IFNULL(?, colores), codigo = IFNULL(?, codigo), categoria1 = IFNULL(?, categoria1), categoria2 = IFNULL(?, categoria2), indicacion = IFNULL(?, indicacion), material = IFNULL(?, material), dimensionYpeso = IFNULL(?, dimensionYpeso), otros = IFNULL(?, otros), precio = IFNULL(?, precio), efectos = IFNULL(?, efectos), silueta = IFNULL(?, silueta), urlImages = IFNULL(?, urlImages) WHERE idProducto = ?",
       [
         nombre,
         descripcion,
