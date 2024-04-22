@@ -46,13 +46,21 @@ export const createProducto = async (req, res) => {
     const {
       nombre, descripcion, tipoVenta, tallas, opcionAmedida, colores, codigo, categorias, indicacion, material, dimension, otros, precio, efectos, silueta, urlImages, activo, stock, peso
     } = req.body;
-    const [rows] = await pool.query(
-      "INSERT INTO PRODUCTO (nombre, descripcion, tipoVenta, tallas, opcionAmedida, colores, codigo, categorias, indicacion, material, dimension, otros, precio, efectos, silueta, urlImages, activo, stock, peso) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)"
-      [nombre, descripcion, tipoVenta, tallas, opcionAmedida, colores, codigo, categorias, indicacion, material, dimension, otros, precio, efectos, silueta, urlImages, activo, stock, peso]
-    );
+
+
+  
+    // Formatear la consulta SQL con los valores
+    const sqlQuery = `INSERT INTO PRODUCTO (nombre, descripcion, tipoVenta, tallas, opcionAmedida, colores, codigo, categorias, indicacion, material, dimension, otros, precio, efectos, silueta, urlImages, activo, stock, peso) VALUES ('${nombre}', '${descripcion}', '${tipoVenta}', '${tallas}', '${opcionAmedida}', '${colores}', '${codigo}', '${categorias}', '${indicacion}', '${material}', '${dimension}', '${otros}', '${precio}', '${efectos}', '${silueta}', '${urlImages}', '${activo}', '${stock}', '${peso}')`;
+    console.log('Consulta SQL:', sqlQuery);
+
+
+
+    const [rows] = await pool.query(sqlQuery);
     res.status(201).json({ id: rows.insertId, nombre, descripcion, tipoVenta, tallas, opcionAmedida, colores, codigo, categorias, indicacion, material, dimension, otros, precio, efectos, silueta, urlImages, activo, stock, peso});
   } catch (error) {
-    return res.status(500).json({ message: "Something goes wrong: "+ error });
+
+  console.error('Error al ejecutar la consulta:', error);
+    return res.status(500).json({ message: "Something goes wrong: "+ error +" ___ "});
   }
 };
 
