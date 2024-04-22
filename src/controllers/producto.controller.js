@@ -44,64 +44,13 @@ export const deleteProducto = async (req, res) => {
 export const createProducto = async (req, res) => {
   try {
     const {
-      nombre,
-      descripcion,
-      costo,
-      tipoVenta,
-      tallas,
-      opcionAmedida,
-      colores,
-      codigo,
-      categoria1,
-      categoria2,
-      indicacion,
-      material,
-      dimensionYpeso,
-      otros,
-      precio,
-      efectos,
-      silueta,
-      urlImages
+      nombre, descripcion, tipoVenta, tallas, opcionAmedida, colores, codigo, categorias, indicacion, material, dimension, otros, precio, efectos, silueta, urlImages, activo, stock, peso
     } = req.body;
     const [rows] = await pool.query(
-      "INSERT INTO PRODUCTO (nombre, descripcion, costo, tipoVenta, tallas, opcionAmedida, colores, codigo, categoria1, categoria2, indicacion, material, dimensionYpeso, otros, precio, efectos, silueta, urlImages ) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)",
-      [nombre,
-        descripcion,
-        costo,
-        tipoVenta,
-        tallas,
-        opcionAmedida,
-        colores,
-        codigo,
-        categoria1,
-        categoria2,
-        indicacion,
-        material,
-        dimensionYpeso,
-        otros,
-        precio,
-        efectos,
-        silueta,
-        urlImages]
+      "INSERT INTO PRODUCTO (nombre, descripcion, tipoVenta, tallas, opcionAmedida, colores, codigo, categorias, indicacion, material, dimension, otros, precio, efectos, silueta, urlImages, activo, stock, peso) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)"
+      [nombre, descripcion, tipoVenta, tallas, opcionAmedida, colores, codigo, categorias, indicacion, material, dimension, otros, precio, efectos, silueta, urlImages, activo, stock, peso]
     );
-    res.status(201).json({ id: rows.insertId, nombre,
-      descripcion,
-      costo,
-      tipoVenta,
-      tallas,
-      opcionAmedida,
-      colores,
-      codigo,
-      categoria1,
-      categoria2,
-      indicacion,
-      material,
-      dimensionYpeso,
-      otros,
-      precio,
-      efectos,
-      silueta,
-      urlImages });
+    res.status(201).json({ id: rows.insertId, nombre, descripcion, tipoVenta, tallas, opcionAmedida, colores, codigo, categorias, indicacion, material, dimension, otros, precio, efectos, silueta, urlImages, activo, stock, peso});
   } catch (error) {
     return res.status(500).json({ message: "Something goes wrong: "+ error });
   }
@@ -111,46 +60,13 @@ export const updateProducto = async (req, res) => {
   try {
     const { id } = req.params;
     const {
-      nombre,
-      descripcion,
-      costo,
-      tipoVenta,
-      tallas,
-      opcionAmedida,
-      colores,
-      codigo,
-      categoria1,
-      categoria2,
-      indicacion,
-      material,
-      dimensionYpeso,
-      otros,
-      precio,
-      efectos,
-      silueta,
-      urlImages
+      nombre, descripcion, tipoVenta, tallas, opcionAmedida, colores, codigo, categorias, indicacion, material, dimension, otros, precio, efectos, silueta, urlImages, activo, stock, peso
     } = req.body;
     const [result] = await pool.query(
-      "UPDATE PRODUCTO SET  nombre = IFNULL(?, nombre), descripcion = IFNULL(?, descripcion), costo = IFNULL(?, costo), tipoVenta = IFNULL(?, tipoVenta), tallas = IFNULL(?, tallas), opcionAmedida = IFNULL(?, opcionAmedida), colores = IFNULL(?, colores), codigo = IFNULL(?, codigo), categoria1 = IFNULL(?, categoria1), categoria2 = IFNULL(?, categoria2), indicacion = IFNULL(?, indicacion), material = IFNULL(?, material), dimensionYpeso = IFNULL(?, dimensionYpeso), otros = IFNULL(?, otros), precio = IFNULL(?, precio), efectos = IFNULL(?, efectos), silueta = IFNULL(?, silueta), urlImages = IFNULL(?, urlImages) WHERE idProducto = ?",
+      "UPDATE PRODUCTO SET  nombre = IFNULL(?,nombre), descripcion = IFNULL(?,descripcion), tipoVenta = IFNULL(?,tipoVenta), tallas = IFNULL(?,tallas), opcionAmedida = IFNULL(?,opcionAmedida), colores = IFNULL(?,colores), codigo = IFNULL(?,codigo), categorias = IFNULL(?,categorias), indicacion = IFNULL(?,indicacion), material = IFNULL(?,material), dimension = IFNULL(?,dimension), otros = IFNULL(?,otros), precio = IFNULL(?,precio), efectos = IFNULL(?,efectos), silueta = IFNULL(?,silueta), urlImages = IFNULL(?,urlImages), activo = IFNULL(?,activo), stock = IFNULL(?,stock), peso = IFNULL(?,peso) WHERE idProducto = ?",
+      
       [
-        nombre,
-        descripcion,
-        costo,
-        tipoVenta,
-        tallas,
-        opcionAmedida,
-        colores,
-        codigo,
-        categoria1,
-        categoria2,
-        indicacion,
-        material,
-        dimensionYpeso,
-        otros,
-        precio,
-        efectos,
-        silueta,
-        urlImages, id]
+        nombre, descripcion, tipoVenta, tallas, opcionAmedida, colores, codigo, categorias, indicacion, material, dimension, otros, precio, efectos, silueta, urlImages, activo, stock, peso, id]
     );
 
     if (result.affectedRows === 0)
