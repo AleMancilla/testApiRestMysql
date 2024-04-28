@@ -15,6 +15,11 @@ import {
   updateUsuario,
 } from "../controllers/usuario.controller.js";
 
+import {
+  getSucursales,
+  getSucursal,
+} from "../controllers/sucursal.controller.js";
+
 const router = Router();
 
 router.get("/productos", getProductos);
@@ -30,6 +35,8 @@ router.delete("/usuario/:id", deleteUsuario);
 router.post("/usuario", createUsuario);
 router.patch("/usuario/:id", updateUsuario);
 
+router.get("/sucursal", getSucursales);
+router.get("/sucursal/:id", getSucursal);
 
 
 export default router;
