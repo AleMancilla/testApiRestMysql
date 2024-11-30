@@ -20,6 +20,14 @@ import {
   getSucursal,
 } from "../controllers/sucursal.controller.js";
 
+import {
+  getCitas,
+  getCita,
+  deleteCita,
+  createCita,
+  updateCita,
+} from "../controllers/cita.controller.js";
+
 const router = Router();
 
 router.get("/productos", getProductos);
@@ -37,6 +45,12 @@ router.patch("/usuario/:id", updateUsuario);
 
 router.get("/sucursal", getSucursales);
 router.get("/sucursal/:id", getSucursal);
+
+router.get("/cita", getCitas);
+router.get("/cita/:id", getCita);
+router.delete("/cita/:id", deleteCita);
+router.post("/cita", createCita);
+router.patch("/cita/:id", updateCita);
 
 
 export default router;

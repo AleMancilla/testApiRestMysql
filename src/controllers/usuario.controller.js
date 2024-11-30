@@ -1,6 +1,7 @@
 import { pool } from "../db.js";
 
 export const getUsuarios = async (req, res) => {
+  console.log(' ==== getUsuarios == ');
   try {
     const [rows] = await pool.query("SELECT * FROM USUARIO");
     res.json(rows);
@@ -10,6 +11,7 @@ export const getUsuarios = async (req, res) => {
 };
 
 export const getUsuario = async (req, res) => {
+  console.log(' ==== getUsuario == ');
   try {
     const { id } = req.params;
     const [rows] = await pool.query("SELECT * FROM USUARIO WHERE uid = ?", [
@@ -27,6 +29,7 @@ export const getUsuario = async (req, res) => {
 };
 
 export const deleteUsuario = async (req, res) => {
+  console.log(' ==== deleteUsuario == ');
   try {
     const { id } = req.params;
     const [rows] = await pool.query("DELETE FROM USUARIO WHERE idUsuario = ?", [id]);
@@ -44,6 +47,9 @@ export const deleteUsuario = async (req, res) => {
 // INSERT INTO `railway`.`USUARIO` (`foto`, `nombre`, `email`, `uid`, `phoneNumber`, `rol`) VALUES ('test.jpg', 'ale test', 'test@gmail.com', 'adsasfr2134s', '65537461', 'admin');
 
 export const createUsuario = async (req, res) => {
+
+  console.log(' ==== createUsuario == ');
+  
   
   try {
     const {
@@ -63,6 +69,7 @@ export const createUsuario = async (req, res) => {
         phoneNumber, 
         rol]
     );
+
     res.status(201).json({ id: rows.insertId, foto, 
       nombre, 
       email, 
@@ -75,6 +82,7 @@ export const createUsuario = async (req, res) => {
 };
 
 export const updateUsuario = async (req, res) => {
+  console.log(' ==== updateUsuario == ');
   try {
     const { id } = req.params;
     const {
