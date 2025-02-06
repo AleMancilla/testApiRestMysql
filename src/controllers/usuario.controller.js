@@ -47,9 +47,7 @@ export const deleteUsuario = async (req, res) => {
 // INSERT INTO `railway`.`USUARIO` (`foto`, `nombre`, `email`, `uid`, `phoneNumber`, `rol`) VALUES ('test.jpg', 'ale test', 'test@gmail.com', 'adsasfr2134s', '65537461', 'admin');
 
 export const createUsuario = async (req, res) => {
-
   console.log(' ==== createUsuario == ');
-  
   
   try {
     const {
