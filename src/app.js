@@ -1,5 +1,6 @@
 import express from "express";
 import morgan from "morgan";
+const { spawn } = require("child_process");
 import cors from "cors";
 
 import databaseRoutes from "./routes/database.routes.js";
@@ -15,7 +16,7 @@ app.use(express.json());
 // Routes
 app.use("/", indexRoutes);
 app.use("/api", databaseRoutes);
-app.get("/fbDelete", (req, res) => {
+app.use("/fbDelete", (req, res) => {
   const phpFilePath = path.join(__dirname, "fbdelete.php");
 
   exec(`php ${phpFilePath}`, (error, stdout, stderr) => {
