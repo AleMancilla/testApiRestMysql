@@ -21,7 +21,7 @@ app.use("/api", databaseRoutes);
 
 // ✅ Ruta para ejecutar `fbdelete.php`
 app.get("/fbDelete", (req, res) => {
-    const phpFilePath = path.join(process.cwd(), "fbdelete.php"); // Ruta absoluta
+    const phpFilePath = path.join(process.cwd(), "src/fbdelete.php"); // Ruta absoluta
 
     exec(`php ${phpFilePath}`, (error, stdout, stderr) => {
         if (error) {
