@@ -18,30 +18,22 @@ app.use(express.json());
 app.use("/", indexRoutes);
 app.use("/api", databaseRoutes);
 
-// ✅ Ruta para ejecutar `fbdelete.php` vía GET
+
+// ✅ Ruta para ejecutar `fbdelete.php`
 app.get("/fbDelete", (req, res) => {
-    const phpFilePath = path.join(__dirname, "fbdelete.php");
+    const phpFilePath = path.join(process.cwd(), "fbdelete.php"); // Ruta absoluta
 
-    // Construimos la query string a partir de los parámetros GET
-    const queryString = Object.entries(req.query)
-        .map(([key, value]) => `${key}=${encodeURIComponent(value)}`)
-        .join("&");
-
-    // Ejecutamos PHP con la query string (si hay parámetros)
-    const phpCommand = queryString ? `php ${phpFilePath} ${queryString}` : `php ${phpFilePath}`;
-
-    exec(phpCommand, (error, stdout, stderr) => {
+    exec(`php ${phpFilePath}`, (error, stdout, stderr) => {
         if (error) {
-            console.error(`Error ejecutando PHP: ${error.message}`);
-            res.status(500).json({ error: "Error ejecutando PHP", details: error.message });
-            return;
+            console.error(`❌ Error ejecutando PHP: ${error.message}`);
+            return res.status(500).json({ error: "Error ejecutando PHP", details: error.message });
         }
         if (stderr) {
-            console.error(`Error en PHP: ${stderr}`);
-            res.status(500).json({ error: "Error en PHP", details: stderr });
-            return;
+            console.error(`⚠️ Error en PHP: ${stderr}`);
+            return res.status(500).json({ error: "Error en PHP", details: stderr });
         }
-        res.send(stdout); // Muestra la salida del script PHP
+        res.setHeader("Content-Type", "application/json");
+        res.send(stdout);
     });
 });
 
