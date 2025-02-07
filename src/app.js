@@ -21,20 +21,11 @@ app.use("/api", databaseRoutes);
 
 // ✅ Ruta para ejecutar `fbdelete.php`
 app.get("/fbDelete", (req, res) => {
-    const phpFilePath = path.join(process.cwd(), "src/fbdelete.php"); // Ruta absoluta
-
-    exec(`php ${phpFilePath}`, (error, stdout, stderr) => {
-        if (error) {
-            console.error(`❌ Error ejecutando PHP: ${error.message}`);
-            return res.status(500).json({ error: "Error ejecutando PHP", details: error.message });
-        }
-        if (stderr) {
-            console.error(`⚠️ Error en PHP: ${stderr}`);
-            return res.status(500).json({ error: "Error en PHP", details: stderr });
-        }
-        res.setHeader("Content-Type", "application/json");
-        res.send(stdout);
-    });
+  const response = {
+      url: "https://example.com",
+      confirmation_code: "abc123"
+  };
+  res.json(response);
 });
 
 // Middleware para manejar rutas no encontradas
