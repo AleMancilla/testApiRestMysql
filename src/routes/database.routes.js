@@ -15,10 +15,18 @@ import {
   updateUsuario,
 } from "../controllers/usuario.controller.js";
 
+// import {
+//   getSucursales,
+//   getSucursal,
+// } from "../controllers/sucursal.controller.js";
+
 import {
   getSucursales,
   getSucursal,
-} from "../controllers/sucursal.controller.js";
+  deleteSucursal,
+  createSucursal,
+  updateSucursal,
+} from "../controllers/sucursales.controller.js";
 
 import {
   getCitas,
@@ -45,6 +53,9 @@ router.patch("/usuario/:id", updateUsuario);
 
 router.get("/sucursal", getSucursales);
 router.get("/sucursal/:id", getSucursal);
+router.delete("/deleteSucursal/:id", deleteSucursal);
+router.post("/createSucursal", createSucursal);
+router.patch("/updateSucursal/:id", updateSucursal);
 
 router.get("/cita", getCitas);
 router.get("/cita/:id", getCita);
