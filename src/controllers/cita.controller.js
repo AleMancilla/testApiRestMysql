@@ -37,11 +37,40 @@ AND CITA_MEDICA.id_persona = USUARIO.idUsuario`);
   }
 };
 
+
 export const getCita = async (req, res) => {
   console.log(" ==== getCitaMedica == ");
   try {
     const { id } = req.params;
-    const [rows] = await pool.query("SELECT * FROM CITA_MEDICA WHERE id = ?", [
+    const [rows] = await pool.query(`SELECT 
+CITA_MEDICA.id as id_cita,
+CITA_MEDICA.id_sucursal,
+CITA_MEDICA.id_persona,
+CITA_MEDICA.motivo_consulta,
+CITA_MEDICA.fecha,
+CITA_MEDICA.hora,
+CITA_MEDICA.nombre_paciente,
+CITA_MEDICA.edad,
+CITA_MEDICA.sexo,
+CITA_MEDICA.celular,
+CITA_MEDICA.estado_cita,
+CITA_MEDICA.medico_asignado,
+USUARIO.foto,
+USUARIO.nombre as nombreUsuario,
+USUARIO.email,
+USUARIO.uid,
+USUARIO.phoneNumber,
+SUCURSALES.nombre as nombreSucursal,
+SUCURSALES.ciudad,
+SUCURSALES.direccion,
+SUCURSALES.contacto,
+SUCURSALES.foto,
+SUCURSALES.horario,
+SUCURSALES.gmaps_link 
+FROM CITA_MEDICA, SUCURSALES, USUARIO
+WHERE CITA_MEDICA.id_sucursal = SUCURSALES.id
+AND CITA_MEDICA.id_persona = USUARIO.idUsuario
+AND CITA_MEDICA.id_persona = ?`, [
       id,
     ]);
 
@@ -49,7 +78,7 @@ export const getCita = async (req, res) => {
       return res.status(404).json({ message: "Cita médica not found" });
     }
 
-    res.json(rows[0]);
+    res.json(rows);
   } catch (error) {
     return res.status(500).json({ message: "Something went wrong: " + error });
   }
